@@ -1,16 +1,85 @@
 # Owned Streamer Contract
 
-A smart contract that manages token streaming with owner-controlled functionality. This contract acts as a wrapper around the currency contract's streaming capabilities, ensuring only the designated owner can create and manage streams.
+## Overview
 
-## Setup & Testing
+The Owned Streamer Contract is a specialized smart contract designed to manage token streaming operations with centralized control. It serves as a secure wrapper around the XIAN currency contract's streaming capabilities, providing owner-controlled access to stream creation and management.
+
+This contract is particularly useful for scenarios where:
+- Token distribution needs to be controlled by a single entity
+- Automated, time-based token distribution is required
+- Streams need to be managed and potentially cancelled by an administrator
+- Token streaming needs to be combined with proper access control
+
+## Features
+
+### Access Control
+- Single owner management system
+- Owner-only access to critical functions
+- Ability to renounce ownership for decentralization
+- Public access to view owner status
+
+### Stream Management
+- Create new token streams with customizable parameters
+- Cancel existing streams with proper token settlement
+- Automatic token distribution based on time
+- Stream status verification
+
+### Token Management
+- Return unused tokens to owner
+- Automatic balance management through currency contract
+- Secure token transfer handling
+
+
+## Security Considerations
+
+1. Owner-only access control for critical functions
+2. Ownership renouncement is irreversible
+3. Stream cancellation includes proper token settlement
+4. Contract requires sufficient token balance for operations
+5. All token operations are handled through the currency contract
+
+## Notes
+
+### Time Format
+- All timestamps must be in 'YYYY-MM-DD HH:MM:SS' format
+- Stream timing is precise to the second
+
+### Token Management
+- Stream rates are calculated in tokens per second
+- Contract must maintain sufficient token balance
+- Unused tokens can be returned to owner
+
+### Ownership
+- Once ownership is renounced, it cannot be reclaimed
+- All owner-only functions become permanently inaccessible after renouncement
+
+### Stream Operations
+- Streams can be created with future start dates
+- Cancelled streams are properly settled before finalization
+- Stream IDs should be stored for future reference
+
+## Dependencies
+
+### Required Contracts
+- Currency Contract: Provides core token and streaming functionality
+  - Token transfers
+  - Stream creation and management
+  - Balance tracking
+
+### Development Dependencies
+- XIAN Contracting Framework: Smart contract deployment and testing environment
+- Python 3.11 or higher
+- pytest for testing
+
+## Installation & Testing
 
 ### Prerequisites
 
-1. Clone the Contracting repository:
+1. Clone the XIAN Contracting repository:
 ```bash
-git clone https://github.com/Lamden/contracting.git
-cd contracting
-pip install -e .
+git clone https://github.com/xian-network/xian-contracting.git
+cd xian-contracting
+pip install .
 ```
 
 2. Install test dependencies:
@@ -108,23 +177,3 @@ def get_owner()
 - **Access**: Public
 - **Returns**: Current owner's address or None if ownership has been renounced
 - **Behavior**: Simple getter for the owner variable
-
-## Security Features
-
-1. Owner-only access control for critical functions
-2. Ownership renouncement capability for decentralization
-3. Proper balance management through the currency contract
-4. Stream management through standardized currency contract methods
-
-## Dependencies
-
-- Currency Contract: Required for token operations and stream management
-- Contracting Framework: For smart contract deployment and testing
-
-## Notes
-
-- All timestamps should be in 'YYYY-MM-DD HH:MM:SS' format
-- Stream rates are calculated in tokens per second
-- Once ownership is renounced, it cannot be reclaimed
-- The contract must have sufficient token balance for streaming operations
-
