@@ -4,11 +4,15 @@
 
 The Owned Streamer Contract is a specialized smart contract designed to manage token streaming operations with centralized control. It serves as a secure wrapper around the XIAN currency contract's streaming capabilities, providing owner-controlled access to stream creation and management.
 
+A key feature of this contract is its ability to be renounced by the owner, effectively making any existing streams immutable. Once ownership is renounced, no one can modify or cancel the streams, ensuring that token distribution continues exactly as initially configured. This makes it particularly suitable for creating trustless, immutable payment streams that cannot be tampered with after setup.
+
 This contract is particularly useful for scenarios where:
 - Token distribution needs to be controlled by a single entity
 - Automated, time-based token distribution is required
 - Streams need to be managed and potentially cancelled by an administrator
 - Token streaming needs to be combined with proper access control
+- Immutable, trustless payment streams are required (through ownership renouncement)
+- Long-term token distribution needs to be guaranteed without possibility of interference
 
 ## Features
 
